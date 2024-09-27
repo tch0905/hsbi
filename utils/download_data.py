@@ -37,6 +37,6 @@ def main(input_path, output_dir):
 
 
 if __name__ == "__main__":
-    path = '../src/data_explorer/faf_documents.csv'
+    path = '../data_explorer/faf_documents.csv'
     output = '../src'
     main(path,output)
