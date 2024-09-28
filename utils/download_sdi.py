@@ -22,22 +22,23 @@ def extract_csv(content, url, path):
     response = requests.get(url)
 
     soup = BeautifulSoup(response.content, 'html.parser')
-    table = soup.find('table', {'id': 'Table1'})
-    table = table.find('table', {'id': 'grdPaging'})
+
+    table = soup.find('table', {'id': 'grdPaging'})
+
+    # Extract column names from table header
+    headers = [th.text.strip() for th in table.find('tr', class_='boldtxtw').find_all('th')]
+    headers = [th.text.strip() for th in table.find('tr', class_='boldtxtw').find_all('td')] if len(headers) == 0 else headers
 
     data = []
     for row in table.find_all('tr')[1:]:
         cols = row.find_all('td')
         data.append([col.text.strip() for col in cols])
 
-    df = pd.DataFrame(data,
-                      # columns=['Form Serial Number', 'Name of substantial shareholder',
-                      #                'Number of shares interested (See *Notes above)',
-                      #                '% of issued voting shares (See *Notes above)',
-                      #                'Date of last notice filed (dd/mm/yyyy)']
-                      )
+    df = pd.DataFrame(data, columns=headers)
     file_path = os.path.join(path, f'{content}.csv')
     df.to_csv(file_path, index=False)
 
 
-
+result = extract_link("https://di.hkex.com.hk/di/NSSrchCorpList.aspx?sa1=cl&scsd=01/07/2023&sced=31/12/2023&sc=1477&src=MAIN&lang=EN&g_lang=en")
+for content, link in result:
+    extract_csv(content, link, "../src")
