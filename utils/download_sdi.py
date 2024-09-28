@@ -9,12 +9,12 @@ def extract_link(url):
     table = soup.find('table', {'id': 'grdPaging'})
     links = table.find_all('a')
 
-    result = []
+    results = []
     for link in links:
         href = link.get('href')
-        result.append(urljoin(url, href))
+        results.append(urljoin(url, href))
 
-    return result
+    return results
 
 url = "https://di.hkex.com.hk/di/NSSrchCorpList.aspx?sa1=cl&scsd=01/07/2023&sced=31/12/2023&sc=1477&src=MAIN&lang=EN&g_lang=en"
 response = requests.get(url)
