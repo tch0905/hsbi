@@ -33,10 +33,10 @@ def main(input_path, output_dir):
                         filename = os.path.basename(url)
                         file_path = os.path.join(ric_path, filename)
                         download_pdf(url, file_path)
-                # if url.startswith('http'):  # Check if the value is a URL
-                #     filename = os.path.basename(url)
-                #     file_path = os.path.join(ric_path, filename)
-                #     download_pdf(url, file_path)
+                if header == "Monthly Return":  # Check if the value is a URL
+                    filename = os.path.basename(url)
+                    file_path = os.path.join(ric_path, filename)
+                    download_pdf(url, file_path)
 
 
 if __name__ == "__main__":
