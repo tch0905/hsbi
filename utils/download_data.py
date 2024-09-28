@@ -1,3 +1,4 @@
+import download_sdi
 import csv
 import os
 import requests
@@ -23,17 +24,15 @@ def main(input_path, output_dir):
                     ric_path = os.path.join(output_dir, match[0])
                     os.makedirs(ric_path, exist_ok=True)
                 if header == 'SDI':
-                    continue
+                    result = download_sdi.extract_link(url)
+                    for content, link in result:
+                        download_sdi.extract_csv(content, link,ric_path)
                 if header == "Financial report":
                     urls = url.split("\n")
                     for url in urls:
                         filename = os.path.basename(url)
                         file_path = os.path.join(ric_path, filename)
                         download_pdf(url, file_path)
-                if url.startswith('http'):  # Check if the value is a URL
-                    filename = os.path.basename(url)
-                    file_path = os.path.join(ric_path, filename)
-                    download_pdf(url, file_path)
 
 
 if __name__ == "__main__":
