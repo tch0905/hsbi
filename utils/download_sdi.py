@@ -38,7 +38,3 @@ def extract_csv(content, url, path):
     file_path = os.path.join(path, f'{content}.csv')
     df.to_csv(file_path, index=False)
 
-
-result = extract_link("https://di.hkex.com.hk/di/NSSrchCorpList.aspx?sa1=cl&scsd=01/07/2023&sced=31/12/2023&sc=1477&src=MAIN&lang=EN&g_lang=en")
-for content, link in result:
-    extract_csv(content, link, "../src")
