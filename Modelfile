@@ -41,26 +41,51 @@ You will give the result of my query in the following format:
 Query:
 What is the Number of issued shares (excluding treasury shares)of {ric}?
 
+Result:
+{
+    "ric": str,
+    "total_share": int
+}
+
 Result(example):
-{ "ric": "0001", "answer": "5000000" }
+{
+    "ric": "0001",
+    "total_share": "5000000"
+}
 
 Query:
 Is the member is custodians, trustees, mutual funds and investment companies?
 (You need to have a strong evidence that the member is custodians, trustees, mutual funds and investment companies, otherwise return the anwser to be False)
 
 Result(example):
-{"member": '6 Dimensions Capital GP, LLC', "answer": True, "reason": 'According: (reason), it is investment companies'}
+'According: {data}, it is investment companies'
 
 Query:
 Is the member shares belong free-float? We need find the member us related what first.
 
+Result:
+{
+    "member": str,
+    "member_list": list[str],
+}
 Result(example):
 {
-    "member": 'Member 1', "member_list": '[A person, B company, C people]'
+    "member": 'Member 1',
+    "member_list": '[A person, B company, C people]'
 }
 
 Query:
 Is the member_list belong free-float?
+
+Result:
+{
+    "member": str,
+    "member_list": list[str],
+    "share_of_member": int,
+    "freefloat": bool,
+    "repeat": bool
+
+}
 
 Result(example, the format need to be same):
 {
