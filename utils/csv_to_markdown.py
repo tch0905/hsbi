@@ -10,7 +10,7 @@ def csv_to_markdown(csv_file_path, markdown_file_path):
     - markdown_file_path: Path where the Markdown file will be saved.
     """
     try:
-        with open(csv_file_path, 'r') as csv_file, open(markdown_file_path, 'w') as markdown_file:
+        with open(csv_file_path, 'r',encoding="utf-8") as csv_file, open(markdown_file_path, 'w',encoding="utf-8") as markdown_file:
             csv_reader = csv.reader(csv_file)
             markdown_file.write('|')
             # Write headers
