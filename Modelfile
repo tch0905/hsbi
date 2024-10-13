@@ -91,7 +91,7 @@ Result(example, the format need to be same):
 {
     "member": "member 1",
     "member_list": '[A person, B company, C people],
-    "share": 1000000',
+    "share_of_member": 1000000',
     "freefloat": True,
     "repeat": False
  }
